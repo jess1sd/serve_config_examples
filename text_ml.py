@@ -54,7 +54,7 @@ class Summarizer:
         return summary
 
     async def __call__(self, http_request: Request) -> str:
-        english_text: str = await http_request.json()
+        english_text: str = (await http_request.json())["text"]
         summary = self.summarize(english_text)
 
         translation_ref = await self.translator.translate.remote(summary)
